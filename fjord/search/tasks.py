@@ -32,7 +32,7 @@ def index_chunk_task(index, batch_id, rec_id, chunk):
     rec = None
 
     try:
-        # Pin to master db to avoid replication lag issues and stale
+        # Pin to main db to avoid replication lag issues and stale
         # data.
         pin_this_thread()
 

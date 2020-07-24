@@ -50,7 +50,7 @@ def update_locales(ctx):
     """
     # Do an git pull to get the latest .po files.
     with ctx.lcd(os.path.join(settings.SRC_DIR, 'locale')):
-        ctx.local('git pull origin master')
+        ctx.local('git pull origin main')
 
     # Run the script that lints the .po files and compiles to .mo the
     # the ones that don't have egregious errors in them. This prints

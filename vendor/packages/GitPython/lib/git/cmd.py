@@ -195,7 +195,7 @@ class Git(object):
             as execute().
 
         Examples::
-            git.rev_list('master', max_count=10, header=True)
+            git.rev_list('main', max_count=10, header=True)
 
         Returns
             Same as execute()

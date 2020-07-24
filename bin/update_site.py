@@ -24,9 +24,9 @@ VENDOR  = 1
 
 ENV_BRANCH = {
     # 'environment': [PROJECT_BRANCH, VENDOR_BRANCH],
-    'dev':   ['master', 'master'],
-    'stage': ['master', 'master'],
-    'prod':  ['master', 'master'],
+    'dev':   ['main', 'main'],
+    'stage': ['main', 'main'],
+    'prod':  ['main', 'main'],
 }
 
 # The URL of the SVN repository with the localization files (*.po). If you set
@@ -81,7 +81,7 @@ def update_site(env, debug):
     elif os.path.exists(os.path.join(locale, '.git')):
         commands += [
             (CHDIR, locale),
-            (EXEC, GIT_PULL % 'master'),
+            (EXEC, GIT_PULL % 'main'),
             (CHDIR, here),
         ]
 

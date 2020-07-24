@@ -110,12 +110,12 @@ class Repo(object):
         """
         return Tag.find_all(self)
 
-    def commits(self, start='master', path='', max_count=10, skip=0):
+    def commits(self, start='main', path='', max_count=10, skip=0):
         """
         A list of Commit objects representing the history of a given ref/commit
 
         ``start``
-            is the branch/commit name (default 'master')
+            is the branch/commit name (default 'main')
 
          ``path``
             is an optional path to limit the returned commits to
@@ -152,13 +152,13 @@ class Repo(object):
         """
         return reversed(Commit.find_all(self, "%s..%s" % (frm, to)))
 
-    def commits_since(self, start='master', path='', since='1970-01-01'):
+    def commits_since(self, start='main', path='', since='1970-01-01'):
         """
         The Commits objects that are newer than the specified date.
         Commits are returned in chronological order.
 
         ``start``
-            is the branch/commit name (default 'master')
+            is the branch/commit name (default 'main')
 
         ``path``
             is an optional path to limit the returned commits to.
@@ -174,12 +174,12 @@ class Repo(object):
 
         return Commit.find_all(self, start, path, **options)
 
-    def commit_count(self, start='master', path=''):
+    def commit_count(self, start='main', path=''):
         """
         The number of commits reachable by the given branch/commit
 
         ``start``
-            is the branch/commit name (default 'master')
+            is the branch/commit name (default 'main')
 
         ``path``
             is an optional path
@@ -211,7 +211,7 @@ class Repo(object):
             raise ValueError, "Invalid identifier %s, or given path '%s' too restrictive" % ( id, path )
         return commits[0]
 
-    def commit_deltas_from(self, other_repo, ref='master', other_ref='master'):
+    def commit_deltas_from(self, other_repo, ref='main', other_ref='main'):
         """
         Returns a list of commits that is in ``other_repo`` but not in self
 
@@ -224,16 +224,16 @@ class Repo(object):
         diff_refs = list(set(other_repo_refs) - set(repo_refs))
         return map(lambda ref: Commit.find_all(other_repo, ref, max_count=1)[0], diff_refs)
 
-    def tree(self, treeish='master'):
+    def tree(self, treeish='main'):
         """
         The Tree object for the given treeish reference
 
         ``treeish``
-            is the reference (default 'master')
+            is the reference (default 'main')
 
         Examples::
 
-          repo.tree('master')
+          repo.tree('main')
 
 
         Returns
@@ -253,7 +253,7 @@ class Repo(object):
         """
         return Blob(self, id=id)
 
-    def log(self, commit='master', path=None, **kwargs):
+    def log(self, commit='main', path=None, **kwargs):
         """
         The Commit for a treeish, and all commits leading to it.
 
@@ -348,12 +348,12 @@ class Repo(object):
         self.git.clone(self.path, path, **options)
         return Repo(path)
 
-    def archive_tar(self, treeish='master', prefix=None):
+    def archive_tar(self, treeish='main', prefix=None):
         """
         Archive the given treeish
 
         ``treeish``
-            is the treeish name/id (default 'master')
+            is the treeish name/id (default 'main')
 
         ``prefix``
             is the optional prefix to prepend to each filename in the archive
@@ -366,7 +366,7 @@ class Repo(object):
             >>> repo.archive_tar('a87ff14')
             <String containing tar archive for commit a87ff14>
 
-            >>> repo.archive_tar('master', 'myproject/')
+            >>> repo.archive_tar('main', 'myproject/')
             <String containing tar bytes archive, whose files are prefixed with 'myproject/'>
 
         Returns
@@ -377,12 +377,12 @@ class Repo(object):
             options['prefix'] = prefix
         return self.git.archive(treeish, **options)
 
-    def archive_tar_gz(self, treeish='master', prefix=None):
+    def archive_tar_gz(self, treeish='main', prefix=None):
         """
         Archive and gzip the given treeish
 
         ``treeish``
-            is the treeish name/id (default 'master')
+            is the treeish name/id (default 'main')
 
         ``prefix``
             is the optional prefix to prepend to each filename in the archive
@@ -395,7 +395,7 @@ class Repo(object):
             >>> repo.archive_tar_gz('a87ff14')
             <String containing tar.gz archive for commit a87ff14>
 
-            >>> repo.archive_tar_gz('master', 'myproject/')
+            >>> repo.archive_tar_gz('main', 'myproject/')
             <String containing tar.gz archive and prefixed with 'myproject/'>
 
         Returns

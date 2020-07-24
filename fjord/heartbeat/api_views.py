@@ -65,7 +65,7 @@ class HeartbeatV2API(rest_framework.views.APIView):
         valid_data = serializer.validated_data
 
         try:
-            # Pin to master db to avoid replication lag issues and stale data.
+            # Pin to main db to avoid replication lag issues and stale data.
             pin_this_thread()
 
             # Try to save it and if it kicks up an integrity error, then
